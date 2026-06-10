@@ -27,7 +27,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     });
 
     try {
-      var url = Uri.parse("${ApiService.baseUrl}register.php");
+      var url = Uri.parse("${ApiService.baseUrl}/register.php");
 
       var response = await http.post(
         url,

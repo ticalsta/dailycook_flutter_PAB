@@ -10,8 +10,7 @@ class AuthProvider extends ChangeNotifier {
   bool isLogin = false;
 
   Future<bool> login(String email, String password) async {
-    var url = Uri.parse("${ApiService.baseUrl}login.php");
-
+    var url = Uri.parse("${ApiService.baseUrl}/login.php");
     var response = await http.post(
       url,
       body: {"email": email, "password": password},

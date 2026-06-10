@@ -23,14 +23,12 @@ class _HomeScreenState extends State<HomeScreen> {
       "subtitle": "10 menit • Hemat",
       "emoji": "🍜",
       "category": "Hemat",
-
       "ingredients":
           "• Nasi\n"
           "• Telur\n"
           "• Bawang merah\n"
           "• Kecap manis\n"
           "• Cabai",
-
       "steps":
           "1. Panaskan minyak\n"
           "2. Tumis bawang dan cabai\n"
@@ -38,58 +36,49 @@ class _HomeScreenState extends State<HomeScreen> {
           "4. Tambahkan nasi\n"
           "5. Beri kecap lalu aduk rata",
     },
-
     {
       "title": "Sup Ayam",
       "subtitle": "Sehat • Keluarga",
       "emoji": "🍲",
       "category": "Sehat",
-
       "ingredients":
           "• Ayam\n"
           "• Wortel\n"
           "• Kentang\n"
           "• Daun bawang\n"
           "• Bawang putih",
-
       "steps":
           "1. Rebus ayam\n"
           "2. Masukkan sayur\n"
           "3. Tambahkan bumbu\n"
           "4. Masak hingga matang",
     },
-
     {
       "title": "Mie Pedas",
       "subtitle": "Praktis Anak Kos",
       "emoji": "🍝",
       "category": "Cepat",
-
       "ingredients":
           "• Mie\n"
           "• Cabai\n"
           "• Telur\n"
           "• Sosis",
-
       "steps":
           "1. Rebus mie\n"
           "2. Tumis cabai\n"
           "3. Masukkan telur\n"
           "4. Campurkan mie",
     },
-
     {
       "title": "Salad Buah",
       "subtitle": "Fresh & Sehat",
       "emoji": "🥗",
       "category": "Dessert",
-
       "ingredients":
           "• Apel\n"
           "• Melon\n"
           "• Anggur\n"
           "• Yogurt",
-
       "steps":
           "1. Potong buah\n"
           "2. Tambahkan yogurt\n"
@@ -102,7 +91,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-
     filteredRecipes = recipes;
   }
 
@@ -122,38 +110,28 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffFFF8F0),
-
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(20),
-
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-
             children: [
-              /// HEADER
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-
                     children: [
                       Text(
                         "Hello, Tika 👋",
-
                         style: GoogleFonts.poppins(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-
                       const SizedBox(height: 5),
-
                       Text(
                         "Mau masak apa hari ini?",
-
                         style: GoogleFonts.poppins(
                           color: Colors.grey,
                           fontSize: 15,
@@ -161,12 +139,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
-
                   CircleAvatar(
                     radius: 28,
-
                     backgroundColor: Colors.orange.shade200,
-
                     child: const Icon(Icons.person, color: Colors.white),
                   ),
                 ],
@@ -174,23 +149,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
               const SizedBox(height: 30),
 
-              /// SEARCH
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
-
                 decoration: BoxDecoration(
                   color: Colors.white,
-
                   borderRadius: BorderRadius.circular(18),
-
                   boxShadow: [
                     BoxShadow(color: Colors.grey.shade200, blurRadius: 10),
                   ],
                 ),
-
                 child: TextField(
                   controller: searchC,
-
                   onChanged: (value) {
                     setState(() {
                       filteredRecipes = recipes.where((recipe) {
@@ -201,12 +170,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       }).toList();
                     });
                   },
-
                   decoration: const InputDecoration(
                     border: InputBorder.none,
-
                     hintText: "Cari resep favoritmu...",
-
                     icon: Icon(Icons.search),
                   ),
                 ),
@@ -214,10 +180,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
               const SizedBox(height: 30),
 
-              /// KATEGORI
               Text(
                 "Kategori",
-
                 style: GoogleFonts.poppins(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -228,20 +192,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-
                 child: Row(
                   children: [
                     categoryItem(
                       "Semua",
                       const Color.fromARGB(255, 133, 130, 130),
                     ),
-
                     categoryItem("Hemat", Colors.orange),
-
                     categoryItem("Cepat", Colors.green),
-
                     categoryItem("Sehat", Colors.red),
-
                     categoryItem("Dessert", Colors.purple),
                   ],
                 ),
@@ -249,10 +208,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
               const SizedBox(height: 30),
 
-              /// RESEP
               Text(
                 "Resep Populer",
-
                 style: GoogleFonts.poppins(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -264,15 +221,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Expanded(
                 child: ListView(
                   children: filteredRecipes.map((recipe) {
-                    return recipeCard(
-                      context,
-
-                      recipe["title"],
-                      recipe["subtitle"],
-                      recipe["emoji"],
-                      recipe["ingredients"],
-                      recipe["steps"],
-                    );
+                    return recipeCard(context, recipe);
                   }).toList(),
                 ),
               ),
@@ -280,28 +229,35 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.orange,
-
-        onPressed: () {
-          Navigator.push(
+        onPressed: () async {
+          final result = await Navigator.push(
             context,
-
             MaterialPageRoute(builder: (_) => const AddRecipeScreen()),
           );
-        },
 
+          if (result != null) {
+            setState(() {
+              recipes.add({
+                "title": result["title"],
+                "subtitle": result["category"],
+                "emoji": "🍽️",
+                "category": result["category"],
+                "ingredients": result["ingredients"],
+                "steps": result["steps"],
+              });
+
+              filteredRecipes = List.from(recipes);
+            });
+          }
+        },
         child: const Icon(Icons.add, color: Colors.white),
       ),
-
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
-
         selectedItemColor: Colors.orange,
-
         unselectedItemColor: Colors.grey,
-
         onTap: (index) {
           setState(() {
             currentIndex = index;
@@ -310,47 +266,36 @@ class _HomeScreenState extends State<HomeScreen> {
           if (index == 2) {
             Navigator.push(
               context,
-
               MaterialPageRoute(builder: (_) => const ProfileScreen()),
             );
           }
         },
-
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite),
             label: "Favorite",
           ),
-
           BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
         ],
       ),
     );
   }
 
-  /// CATEGORY
   Widget categoryItem(String title, Color color) {
     return GestureDetector(
       onTap: () {
         filterRecipe(title);
       },
-
       child: Container(
         margin: const EdgeInsets.only(right: 15),
-
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-
         decoration: BoxDecoration(
           color: color,
-
           borderRadius: BorderRadius.circular(20),
         ),
-
         child: Text(
           title,
-
           style: GoogleFonts.poppins(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -360,20 +305,17 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  /// RECIPE CARD
-  Widget recipeCard(
-    BuildContext context,
-    String title,
-    String subtitle,
-    String emoji,
-    String ingredients,
-    String steps,
-  ) {
+  Widget recipeCard(BuildContext context, Map recipe) {
+    String title = recipe["title"] ?? "";
+    String subtitle = recipe["subtitle"] ?? "";
+    String emoji = recipe["emoji"] ?? "🍽️";
+    String ingredients = recipe["ingredients"] ?? "";
+    String steps = recipe["steps"] ?? "";
+
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
-
           MaterialPageRoute(
             builder: (_) => DetailScreen(
               title: title,
@@ -385,44 +327,114 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         );
       },
-
       child: Container(
         margin: const EdgeInsets.only(bottom: 20),
-
         padding: const EdgeInsets.all(18),
-
         decoration: BoxDecoration(
           color: Colors.white,
-
           borderRadius: BorderRadius.circular(25),
-
           boxShadow: [BoxShadow(color: Colors.grey.shade200, blurRadius: 10)],
         ),
-
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(emoji, style: const TextStyle(fontSize: 40)),
-
-            const SizedBox(width: 20),
-
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-
-              children: [
-                Text(
-                  title,
-
-                  style: GoogleFonts.poppins(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+            Expanded(
+              child: Row(
+                children: [
+                  Text(emoji, style: const TextStyle(fontSize: 40)),
+                  const SizedBox(width: 20),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          title,
+                          style: GoogleFonts.poppins(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        const SizedBox(height: 5),
+                        Text(
+                          subtitle,
+                          style: GoogleFonts.poppins(color: Colors.grey),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-
-                const SizedBox(height: 5),
-
-                Text(subtitle, style: GoogleFonts.poppins(color: Colors.grey)),
-              ],
+                ],
+              ),
             ),
+            emoji == "🍽️"
+                ? Row(
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.edit, color: Colors.blue),
+                        onPressed: () async {
+                          final result = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => AddRecipeScreen(recipe: recipe),
+                            ),
+                          );
+
+                          if (result != null) {
+                            setState(() {
+                              recipe["title"] = result["title"];
+                              recipe["subtitle"] = result["category"];
+                              recipe["category"] = result["category"];
+                              recipe["ingredients"] = result["ingredients"];
+                              recipe["steps"] = result["steps"];
+
+                              filteredRecipes = List.from(recipes);
+                            });
+                          }
+                        },
+                      ),
+
+                      IconButton(
+                        icon: const Icon(Icons.delete, color: Colors.red),
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: const Text("Hapus Resep"),
+                              content: const Text(
+                                "Yakin ingin menghapus resep ini?",
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: const Text("Batal"),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    setState(() {
+                                      recipes.removeWhere(
+                                        (item) => item == recipe,
+                                      );
+                                      filteredRecipes = List.from(recipes);
+                                    });
+
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text("Resep berhasil dihapus"),
+                                      ),
+                                    );
+                                  },
+                                  child: const Text("Hapus"),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  )
+                : const SizedBox(),
           ],
         ),
       ),
